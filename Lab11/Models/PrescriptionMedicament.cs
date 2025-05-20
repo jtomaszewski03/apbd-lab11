@@ -11,12 +11,13 @@ public class PrescriptionMedicament
     [Key]
     [ForeignKey(nameof(Medicament))]
     public int IdMedicament { get; set; }
-    public virtual Medicament Medicament { get; set; }
     [Key]
     [ForeignKey(nameof(Prescription))]
     public int IdPrescription { get; set; }
-    public virtual Prescription Prescription { get; set; }
     public int? Dose { get; set; }
     [MaxLength(100)]
     public string Details { get; set; }
+
+    public virtual Medicament Medicament { get; set; }
+    public virtual Prescription Prescription { get; set; }
 }

@@ -24,7 +24,7 @@ public class DbService : IDbService
                 throw new InvalidDataException("The due date cannot be earlier than Date.");
             }
 
-            var patient = await _context.Patients.FindAsync(prescriptionDto.Patient.IdPatient);
+            var patient = await _context.Patients.FirstOrDefaultAsync(p => p.IdPatient == prescriptionDto.Patient.IdPatient);
             if (patient == null)
             {
                 patient = new Patient
@@ -45,7 +45,7 @@ public class DbService : IDbService
             var medicamentIds = prescriptionDto.Medicaments.Select(m => m.IdMedicament).ToList();
             foreach (var medicamentId in medicamentIds)
             {
-                var medicament = await _context.Medicaments.FindAsync(medicamentId);
+                var medicament = await _context.Medicaments.FirstOrDefaultAsync(m => m.IdMedicament == medicamentId);
                 if (medicament == null)
                 {
                     throw new NotFoundException("The medicament cannot be found.");
